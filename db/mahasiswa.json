@@ -1,0 +1,162 @@
+[
+  {
+    "id": "1",
+    "nim": "M001",
+    "nama": "Andi",
+    "email": "andi@gmail.com",
+    "jurusan": "Informatika",
+    "maxSKS": 18
+  },
+  {
+    "id": "2",
+    "nim": "M002",
+    "nama": "Budi",
+    "email": "budi@gmail.com",
+    "jurusan": "Sistem Informasi",
+    "maxSKS": 20
+  },
+  {
+    "id": "3",
+    "nim": "M003",
+    "nama": "Citra",
+    "email": "citra@gmail.com",
+    "jurusan": "Informatika",
+    "maxSKS": 22
+  },
+  {
+    "id": "4",
+    "nim": "M004",
+    "nama": "Dina",
+    "email": "dina@gmail.com",
+    "jurusan": "Sistem Informasi",
+    "maxSKS": 18
+  },
+  {
+    "id": "5",
+    "nim": "M005",
+    "nama": "Eko",
+    "email": "eko@gmail.com",
+    "jurusan": "Informatika",
+    "maxSKS": 24
+  },
+  {
+    "id": "6",
+    "nim": "M006",
+    "nama": "Fajar",
+    "email": "fajar@gmail.com",
+    "jurusan": "Teknik Komputer",
+    "maxSKS": 21
+  },
+  {
+    "id": "7",
+    "nim": "M007",
+    "nama": "Gita",
+    "email": "gita@gmail.com",
+    "jurusan": "Sistem Informasi",
+    "maxSKS": 20
+  },
+  {
+    "id": "8",
+    "nim": "M008",
+    "nama": "Hani",
+    "email": "hani@gmail.com",
+    "jurusan": "Informatika",
+    "maxSKS": 18
+  },
+  {
+    "id": "9",
+    "nim": "M009",
+    "nama": "Iwan",
+    "email": "iwan@gmail.com",
+    "jurusan": "Teknik Komputer",
+    "maxSKS": 20
+  },
+  {
+    "id": "10",
+    "nim": "M010",
+    "nama": "Joko",
+    "email": "joko@gmail.com",
+    "jurusan": "Informatika",
+    "maxSKS": 18
+  },
+  {
+    "id": "11",
+    "nim": "M011",
+    "nama": "Kiki",
+    "email": "kiki@gmail.com",
+    "jurusan": "Sistem Informasi",
+    "maxSKS": 24
+  },
+  {
+    "id": "12",
+    "nim": "M012",
+    "nama": "Lia",
+    "email": "lia@gmail.com",
+    "jurusan": "Teknik Komputer",
+    "maxSKS": 20
+  },
+  {
+    "id": "13",
+    "nim": "M013",
+    "nama": "Maya",
+    "email": "maya@gmail.com",
+    "jurusan": "Informatika",
+    "maxSKS": 18
+  },
+  {
+    "id": "14",
+    "nim": "M014",
+    "nama": "Nina",
+    "email": "nina@gmail.com",
+    "jurusan": "Sistem Informasi",
+    "maxSKS": 22
+  },
+  {
+    "id": "15",
+    "nim": "M015",
+    "nama": "Oki",
+    "email": "oki@gmail.com",
+    "jurusan": "Teknik Komputer",
+    "maxSKS": 20
+  },
+  {
+    "id": "16",
+    "nim": "M016",
+    "nama": "Putri",
+    "email": "putri@gmail.com",
+    "jurusan": "Informatika",
+    "maxSKS": 18
+  },
+  {
+    "id": "17",
+    "nim": "M017",
+    "nama": "Qila",
+    "email": "qila@gmail.com",
+    "jurusan": "Sistem Informasi",
+    "maxSKS": 18
+  },
+  {
+    "id": "18",
+    "nim": "M018",
+    "nama": "Rudi",
+    "email": "rudi@gmail.com",
+    "jurusan": "Informatika",
+    "maxSKS": 21
+  },
+  {
+    "id": "19",
+    "nim": "M019",
+    "nama": "Salsa",
+    "email": "salsa@gmail.com",
+    "jurusan": "Sistem Informasi",
+    "maxSKS": 18
+  },
+  {
+    "id": "20",
+    "nim": "M020",
+    "nama": "Tino",
+    "email": "tino@gmail.com",
+    "jurusan": "Teknik Komputer",
+    "maxSKS": 18
+  }
+]

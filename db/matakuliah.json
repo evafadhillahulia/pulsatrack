@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "kode": "MK01",
+    "nama": "Algoritma dan Pemrograman",
+    "sks": 3
+  },
+  {
+    "id": "2",
+    "kode": "MK02",
+    "nama": "Basis Data",
+    "sks": 3
+  },
+  {
+    "id": "3",
+    "kode": "MK03",
+    "nama": "Jaringan Komputer",
+    "sks": 2
+  },
+  {
+    "id": "4",
+    "kode": "MK04",
+    "nama": "Pemrograman Sisi Klien",
+    "sks": 3
+  },
+  {
+    "id": "5",
+    "kode": "MK05",
+    "nama": "Pemrograman Sisi Server",
+    "sks": 3
+  },
+  {
+    "id": "6",
+    "kode": "MK06",
+    "nama": "Kalkulus",
+    "sks": 3
+  },
+  {
+    "id": "7",
+    "kode": "MK07",
+    "nama": "Rekayasa Perangkat Lunak",
+    "sks": 3
+  },
+  {
+    "id": "8",
+    "kode": "MK08",
+    "nama": "Kecerdasan Buatan",
+    "sks": 3
+  }
+]
