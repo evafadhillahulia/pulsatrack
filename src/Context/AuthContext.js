@@ -1,11 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../firebase/firebase"; // pastikan path-nya sesuai
 
 const AuthStateContext = createContext();
 const AuthDispatchContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, _setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // Tambahkan state loading
+  const [isLoading, setIsLoading] = useState(true);
 
   const setUser = (user) => {
     _setUser(user);
@@ -18,12 +21,43 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        const { uid, email } = firebaseUser;
 
-    if (storedUser) {
-      _setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false); // setelah cek localStorage, loading selesai
+        try {
+          const docRef = doc(db, "users", uid);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+
+            const userData = {
+              uid,
+              email,
+              nama: data.nama || "",
+              role: data.role || "",
+              permissions: data.permissions || [],
+            };
+
+            setUser(userData);
+            console.log("✅ Logged in as:", userData);
+          } else {
+            console.warn("⚠️ No user document found in Firestore.");
+            setUser({ uid, email }); // fallback
+          }
+        } catch (error) {
+          console.error("🔥 Error getting user data from Firestore:", error);
+          setUser({ uid, email }); // fallback jika error
+        }
+      } else {
+        setUser(null);
+      }
+
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (

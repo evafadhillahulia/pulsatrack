@@ -10,7 +10,7 @@ const Header = () => {
     <header className="bg-white shadow-md">
       <div className="flex justify-between items-center px-6 py-4">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-800">UDINUS HOME</h1>
+          <h1 className="text-2xl font-semibold text-gray-800">PUKA TRACK PULSA</h1>
           {user && (
             <p className="text-sm text-gray-500">Welcome, {user.nama} ({user.role})</p>
           )}

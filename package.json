@@ -1,5 +1,5 @@
 {
-  "name": "tugas13",
+  "name": "pukacell",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,6 +12,8 @@
     "axios": "^1.9.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "firebase": "^12.0.0",
+    "framer-motion": "^12.23.9",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
     "lucide-react": "^0.487.0",
@@ -20,7 +22,7 @@
     "react-dom": "^19.1.0",
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
-    "react-router-dom": "^7.4.0",
+    "react-router-dom": "^7.7.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.5",
     "recharts": "^2.15.4",
@@ -29,7 +31,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node server.js ",
+    "start": "react-scripts start",
+    "react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -54,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^9.2.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "json-server": "^0.17.4"
   }

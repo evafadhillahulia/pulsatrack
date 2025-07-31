@@ -1,192 +1,127 @@
-import React, { useState } from "react";
+// src/pages/Register.jsx
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
-import toast from "react-hot-toast";
-import AxiosInstance from "../../Utils/Helpers/AxiosInstance";
-import Label from "../../Components/Label";
-import Input from "../../Components/Input";
-import Button from "../../Components/Button";
+import { FaUser, FaEnvelope, FaLock, FaUserShield } from "react-icons/fa";
+import { toastSuccess, toastError } from "../../Utils/Helpers/ToastHelper";
+
 
 const Register = () => {
+  const [form, setForm] = useState({ nama: "", email: "", password: "", role: "admin" });
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [role, setRole] = useState("");
 
-  const showCustomToast = (message, type = "success") => {
-    toast.custom(
-      () => (
-        <div
-          className="flex items-center gap-3"
-          style={{
-            background:
-              type === "success"
-                ? "#4ade80"
-                : type === "error"
-                ? "#f87171"
-                : "#fcd34d",
-            color: "#1e3a8a",
-            fontWeight: "bold",
-            padding: "16px",
-            borderRadius: "12px",
-            fontSize: "16px",
-            boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
-          }}
-        >
-          <span>
-            {type === "success" ? "✅" : type === "error" ? "❌" : "⚠️"}
-          </span>
-          <span>{message}</span>
-        </div>
-      ),
-      {
-        position: "top-center",
-        duration: 3000,
-      }
-    );
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    const nama = e.target.nama.value.trim();
-    const email = e.target.email.value.trim().toLowerCase();
-    const password = e.target.password.value;
-    const selectedRole = role.toLowerCase();
-
-    if (!selectedRole) {
-      showCustomToast("Silakan pilih role terlebih dahulu", "error");
-      setLoading(false);
-      return;
-    }
-
-    if (password.length < 4) {
-      showCustomToast("Password minimal 4 karakter", "error");
-      setLoading(false);
-      return;
-    }
-
     try {
-      const cekRes = await AxiosInstance.get(`/user?email=${email}`);
-      if (cekRes.data.length > 0) {
-        showCustomToast("Email sudah terdaftar!", "error");
-        setLoading(false);
-        return;
-      }
-
-      let permissions = [];
-      switch (selectedRole) {
-        case "admin":
-          permissions = [
-            "dashboard.page",
-            "user.manage",
-            "krs.page",
-            "mahasiswa.page",
-            "dosen.page",
-            "matakuliah.page",
-          ];
-          break;
-        case "dosen":
-          permissions = ["krs.read", "krs.page"];
-          break;
-        case "mahasiswa":
-          permissions = ["krs.page"];
-          break;
-        default:
-          permissions = [];
-      }
-
-      const newUser = {
-        nama,
-        email,
-        password,
-        role: selectedRole,
-        permissions,
-      };
-
-      await AxiosInstance.post("/user", newUser);
-
-      showCustomToast("Registrasi berhasil! Silakan login.", "success");
+      const userCredential = await createUserWithEmailAndPassword(auth, form.email, form.password);
+      const user = userCredential.user;
+  
+      await setDoc(doc(db, "users", user.uid), {
+        nama: form.nama,
+        email: form.email,
+        role: form.role,
+      });
+  
+      // ✅ Tampilkan toast sukses
+      toastSuccess("Berhasil daftar, silakan login.");
       navigate("/login");
-    } catch (err) {
-      console.error("Register error:", err?.response?.data || err.message);
-      showCustomToast("Gagal registrasi. Coba lagi.", "error");
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      toastError(error.message);
     }
   };
+  
+  
 
   return (
-    <>
-      <h2 className="text-3xl font-semibold text-center text-blue-600 mb-6">
-        Register
-      </h2>
-      <form onSubmit={handleRegister} className="space-y-4">
-        <div>
-          <Label htmlFor="nama">Nama</Label>
-          <Input
+    <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6 p-8 bg-white rounded-lg mx-auto">
+      <h2 className="text-3xl font-bold text-center text-purple-700">Register</h2>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Nama</label>
+        <div className="flex items-center border border-purple-300 rounded-lg px-3">
+          <FaUser className="text-purple-500 mr-2" />
+          <input
             type="text"
-            id="nama"
             name="nama"
+            value={form.nama}
+            onChange={handleChange}
             placeholder="Masukkan nama"
+            className="w-full py-2 outline-none"
             required
-            disabled={loading}
           />
         </div>
-        <div>
-          <Label htmlFor="email">Email</Label>
-          <Input
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <div className="flex items-center border border-purple-300 rounded-lg px-3">
+          <FaEnvelope className="text-purple-500 mr-2" />
+          <input
             type="email"
-            id="email"
             name="email"
+            value={form.email}
+            onChange={handleChange}
             placeholder="Masukkan email"
+            className="w-full py-2 outline-none"
             required
-            disabled={loading}
           />
         </div>
-        <div>
-          <Label htmlFor="password">Password</Label>
-          <Input
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+        <div className="flex items-center border border-purple-300 rounded-lg px-3">
+          <FaLock className="text-purple-500 mr-2" />
+          <input
             type="password"
-            id="password"
             name="password"
+            value={form.password}
+            onChange={handleChange}
             placeholder="Masukkan password"
+            className="w-full py-2 outline-none"
             required
-            disabled={loading}
           />
         </div>
-        <div>
-          <Label htmlFor="role">Pilih Role</Label>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+        <div className="flex items-center border border-purple-300 rounded-lg px-3">
+          <FaUserShield className="text-purple-500 mr-2" />
           <select
-            id="role"
             name="role"
-            className="w-full border border-gray-300 rounded-md p-2"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
+            value={form.role}
+            onChange={handleChange}
+            className="w-full py-2 outline-none bg-white"
             required
-            disabled={loading}
           >
-            <option value="">-- Pilih Role --</option>
             <option value="admin">Admin</option>
-            <option value="dosen">Dosen</option>
-            <option value="mahasiswa">Mahasiswa</option>
+            <option value="owner">Owner</option>
           </select>
         </div>
-        <Button
-          type="submit"
-          className="w-full bg-green-600 hover:bg-green-700"
-          disabled={loading}
-        >
-          {loading ? "Mendaftarkan..." : "Register"}
-        </Button>
-      </form>
+      </div>
 
-      <p className="text-center mt-4">
+      <button
+        type="submit"
+        className="w-full flex items-center justify-center gap-2 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition duration-200"
+      >
+        <FaUser />
+        Register
+      </button>
+
+      <p className="text-center text-sm text-gray-700">
         Sudah punya akun?{" "}
-        <Link to="/login" className="text-blue-500 hover:underline">
-          Login di sini
+        <Link to="/login" className="text-purple-700 font-medium hover:underline">
+          Login sekarang
         </Link>
       </p>
-    </>
+    </form>
   );
 };
 
